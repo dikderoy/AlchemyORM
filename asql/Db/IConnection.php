@@ -52,7 +52,16 @@ interface IConnection
 	 *
 	 * @param string $query
 	 *
-	 * @return ICommandBuilder
+	 * @return ICommand
 	 */
 	public function createCommand($query = null);
+
+	/**
+	 * create new IQuery
+	 *
+	 * @param string|ICommand $query
+	 *
+	 * @return IQuery
+	 */
+	public function createQuery($query);
 }

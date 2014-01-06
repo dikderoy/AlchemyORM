@@ -19,11 +19,19 @@ namespace asql\Db;
 interface ICommand
 {
 	/**
+	 * if $query is not null it is treated as string and assigned using setQueryString()
+	 *
+	 * @param IConnection $connection
+	 * @param null        $query
+	 */
+	public function __construct(IConnection $connection, $query = null);
+
+	/**
 	 * set query string property
 	 *
-	 * @param $sql
+	 * @param $query
 	 */
-	public function setQueryString($sql);
+	public function setQueryString($query);
 
 	/**
 	 * set query parameters to be bound
@@ -53,4 +61,37 @@ interface ICommand
 	 * @return array
 	 */
 	public function getQueryMeta();
+
+	/**
+	 * prepare a query for multiple execution
+	 *
+	 * @return IQuery
+	 */
+	public function prepare();
+
+	/**
+	 * prepare and execute a result-less query (such as insert or update)
+	 *
+	 * @param bool $rowCount return row count if query succeeds
+	 *
+	 * @return bool|int
+	 */
+	public function execute($rowCount = false);
+
+	/**
+	 * prepare and execute a result query (select)
+	 *
+	 * @param array|null $params parameters to apply,
+	 * replaces ones which was configured by Command or CommandBuilder if any
+	 *
+	 * @return IQueryResult|false
+	 */
+	public function query($params = null);
+
+	/**
+	 * string representation of a command
+	 *
+	 * @return string
+	 */
+	public function __toString();
 }

@@ -8,7 +8,7 @@
 
 namespace asql\Db;
 
-interface ICommandBuilder
+interface ISQLCommandBuilder
 {
 	public function select($cols);
 

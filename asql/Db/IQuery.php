@@ -23,9 +23,9 @@ interface IQuery extends ICommand
 	 * receives connection and command to bootstrap from
 	 *
 	 * @param IConnection $connection
-	 * @param ICommand    $command
+	 * @param null        $query
 	 */
-	public function __construct(IConnection $connection, ICommand $command);
+	public function __construct(IConnection $connection, $query = null);
 
 	/**
 	 * returns statement object or sql result handle if available, otherwise returns:
@@ -41,7 +41,7 @@ interface IQuery extends ICommand
 	/**
 	 * prepare a query for multiple execution
 	 *
-	 * @return mixed
+	 * @return IQuery
 	 */
 	public function prepare();
 
