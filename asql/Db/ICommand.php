@@ -72,17 +72,19 @@ interface ICommand
 	/**
 	 * prepare and execute a result-less query (such as insert or update)
 	 *
-	 * @param bool $rowCount return row count if query succeeds
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
+	 * @param bool       $rowCount return row count if query succeeds
 	 *
 	 * @return bool|int
 	 */
-	public function execute($rowCount = false);
+	public function execute($params = null, $rowCount = false);
 
 	/**
 	 * prepare and execute a result query (select)
 	 *
-	 * @param array|null $params parameters to apply,
-	 * replaces ones which was configured by Command or CommandBuilder if any
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
 	 *
 	 * @return IQueryResult|false
 	 */

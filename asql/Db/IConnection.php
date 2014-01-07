@@ -13,6 +13,36 @@ interface IConnection
 	/**
 	 * sets parameters for connection to a server
 	 *
+	 * actually runs IConnection::setup() within if arguments provided
+	 *
+	 * typical configuration consists of:
+	 *
+	 *  username;
+	 *  password;
+	 *  server address;
+	 *  port (optional)
+	 *
+	 * options may consist of additional configuration which affects default driver behavior,
+	 * e.g. look at PDO connection setup
+	 *
+	 * @param array $config - required configuration data
+	 * @param array $options - additional options for PDO object
+	 */
+	public function __construct(array $config = array(), array $options = array());
+
+	/**
+	 * sets parameters for connection to a server
+	 *
+	 * typical configuration consists of:
+	 *
+	 *  username;
+	 *  password;
+	 *  server address;
+	 *  port (optional)
+	 *
+	 * options may consist of additional configuration which affects default driver behavior,
+	 * e.g. look at PDO connection setup
+	 *
 	 * @param array $config - required configuration data
 	 * @param array $options - additional options for PDO object
 	 *

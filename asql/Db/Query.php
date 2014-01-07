@@ -18,6 +18,12 @@ namespace asql\Db;
 abstract class Query implements IQuery
 {
 	/**
+	 * Connection supervisor instance
+	 *
+	 * @var IConnection
+	 */
+	protected $connection;
+	/**
 	 * @var string Pure SQL query string
 	 */
 	protected $queryString;
@@ -33,14 +39,19 @@ abstract class Query implements IQuery
 	/**
 	 * if $query is not null it is treated as string and assigned using setQueryString()
 	 *
-	 * @param IConnection $connection
-	 * @param null        $query
+	 * @param IConnection          $connection
+	 * @param null|string|ICommand $query
 	 */
 	public function __construct(IConnection $connection, $query = null)
 	{
 		$this->connection = $connection;
-		if ($query)
-			$this->setQueryString($query);
+		if ($query) {
+			if ($query instanceof ICommand) {
+				$this->setQueryString($query->getQueryString());
+				$this->setQueryParams($query->getQueryParams());
+			} else
+				$this->setQueryString($query);
+		}
 	}
 
 	/**
@@ -76,10 +87,14 @@ abstract class Query implements IQuery
 	/**
 	 * returns ready to use query string with param placeholders
 	 *
+	 * @param null $params
+	 *
 	 * @return string
 	 */
-	public function getQueryString()
+	public function getQueryString($params = null)
 	{
+		//TODO: add support of parameter replacement (for non prepared queries)
+
 		return $this->queryString;
 	}
 

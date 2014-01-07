@@ -18,11 +18,13 @@ interface IQueryResult
 	public function fetchScalar();
 
 	/**
-	 * fetch first column values as array
+	 * fetch Nth column values as array
+	 *
+	 * @param int $columnNumber
 	 *
 	 * @return array
 	 */
-	public function fetchColumn();
+	public function fetchColumn($columnNumber = 0);
 
 	/**
 	 * pass next row of query result into existing object instance
@@ -46,12 +48,13 @@ interface IQueryResult
 	/**
 	 * fetch all rows of query result as array of objects of given class
 	 *
-	 * @param string $class name of class which instance should be returned
-	 * @param array  $params array of parameters passed to class constructor
+	 * @param string      $class name of class which instance should be returned
+	 * @param array       $params array of parameters passed to class constructor
+	 * @param null|string $index field name to fetch result by (if null - collection will have numeric index)
 	 *
 	 * @return object[]|boolean
 	 */
-	public function fetchObjectCollection($class, $params = null);
+	public function fetchObjectCollection($class, $params = null, $index = null);
 
 	/**
 	 * fetch next row of query result as array of key-paired values
@@ -65,10 +68,10 @@ interface IQueryResult
 	/**
 	 * fetch all rows of query result as collection arrays of key-paired values (optionally indexed by $index)
 	 *
-	 * @param null|string $index field name to fetch result by (if null - collection will have numeric index)
 	 * @param boolean     $numericalKeys fetch row with numerical keys instead of string keys
+	 * @param null|string $index field name to fetch result by (if null - collection will have numeric index)
 	 *
 	 * @return array[]|boolean
 	 */
-	public function fetchArrayCollection($index = null, $numericalKeys = false);
+	public function fetchArrayCollection($numericalKeys = false, $index = null);
 }

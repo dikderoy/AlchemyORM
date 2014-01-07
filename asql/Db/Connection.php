@@ -10,8 +10,30 @@ namespace asql\Db;
 
 abstract class Connection implements IConnection
 {
-	private $queryClass = 'Query';
-	private $commandClass = 'Command';
+	/**
+	 * configurable class used for Queries,
+	 * must implement IQuery interface
+	 * and|or be extended from \asq\Db\Query or its descendants
+	 *
+	 * @var string
+	 */
+	protected $queryClass = '\asql\Db\Query';
+	/**
+	 * configurable class used for Commands,
+	 * must implement ICommand interface
+	 * and|or be extended from \asq\Db\Command or its descendants
+	 *
+	 * @var string
+	 */
+	protected $commandClass = '\asql\Db\Command';
+	/**
+	 * configurable class used for Statements|QueryResults,
+	 * must implement IQueryResult interface
+	 * and|or be extended from \asq\Db\QueryResult or its descendants
+	 *
+	 * @var string
+	 */
+	protected $resultClass = '\asql\Db\QueryResult';
 	/**
 	 * configuration parameters as is
 	 *
@@ -30,6 +52,30 @@ abstract class Connection implements IConnection
 	 * @var mixed|resource|null
 	 */
 	protected $connection;
+
+	/**
+	 * sets parameters for connection to a server
+	 *
+	 * actually runs IConnection::setup() within if arguments provided
+	 *
+	 * typical configuration consists of:
+	 *
+	 *  username;
+	 *  password;
+	 *  server address;
+	 *  port (optional)
+	 *
+	 * options may consist of additional configuration which affects default driver behavior,
+	 * e.g. look at PDO connection setup
+	 *
+	 * @param array $config - required configuration data
+	 * @param array $options - additional options for PDO object
+	 */
+	public function __construct(array $config = array(), array $options = array())
+	{
+		if ($config)
+			$this->setup($config, $options);
+	}
 
 	/**
 	 * returns active connection object or resource

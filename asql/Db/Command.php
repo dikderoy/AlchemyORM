@@ -86,43 +86,53 @@ abstract class Command implements ICommand
 	 */
 	public function setQueryString($query)
 	{
-		$this->queryString = $query;
+		if ($query !== null && is_string($query))
+			$this->queryString = $query;
 	}
 
 	/**
 	 * prepare a query for multiple execution
 	 *
+	 * @throws Exception
 	 * @return IQuery
 	 */
 	public function prepare()
 	{
-		/** @var IQuery $query */
-		$query = $this->connection->createQuery($this);
-		return $query->prepare();
+		if ($this->queryString == null)
+			throw new Exception('no query to prepare');
+		return $this->connection->createQuery($this)->prepare();
 	}
 
 	/**
 	 * prepare and execute a result-less query (such as insert or update)
 	 *
-	 * @param bool $rowCount return row count if query succeeds
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
+	 * @param bool       $rowCount return row count if query succeeds
 	 *
+	 * @throws Exception
 	 * @return bool|int
 	 */
-	public function execute($rowCount = false)
+	public function execute($params = null, $rowCount = false)
 	{
-		return $this->connection->createQuery($this)->execute($rowCount);
+		if ($this->queryString == null)
+			throw new Exception('no query to execute');
+		return $this->connection->createQuery($this)->execute($params, $rowCount);
 	}
 
 	/**
 	 * prepare and execute a result query (select)
 	 *
-	 * @param array|null $params parameters to apply,
-	 * replaces ones which was configured by Command or CommandBuilder if any
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
 	 *
+	 * @throws Exception
 	 * @return IQueryResult|false
 	 */
 	public function query($params = null)
 	{
+		if ($this->queryString == null)
+			throw new Exception('no query to stream results from');
 		return $this->connection->createQuery($this)->query($params);
 	}
 }

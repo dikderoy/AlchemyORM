@@ -22,8 +22,8 @@ interface IQuery extends ICommand
 	/**
 	 * receives connection and command to bootstrap from
 	 *
-	 * @param IConnection $connection
-	 * @param null        $query
+	 * @param IConnection          $connection
+	 * @param null|string|ICommand $query
 	 */
 	public function __construct(IConnection $connection, $query = null);
 
@@ -39,6 +39,17 @@ interface IQuery extends ICommand
 	public function getStatement();
 
 	/**
+	 * return a query string
+	 *
+	 * if params passed - perform param replacement in query string
+	 *
+	 * @param array|null $params
+	 *
+	 * @return string
+	 */
+	public function getQueryString($params = null);
+
+	/**
 	 * prepare a query for multiple execution
 	 *
 	 * @return IQuery
@@ -48,17 +59,19 @@ interface IQuery extends ICommand
 	/**
 	 * prepare and execute a result-less query (such as insert or update)
 	 *
-	 * @param bool $rowCount return row count if query succeeds
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
+	 * @param bool       $rowCount return row count if query succeeds
 	 *
 	 * @return bool|int
 	 */
-	public function execute($rowCount = false);
+	public function execute($params = null, $rowCount = false);
 
 	/**
 	 * prepare and execute a result query (select)
 	 *
-	 * @param array|null $params parameters to apply,
-	 * replaces ones which was configured by Command or CommandBuilder if any
+	 * @param array|null $params parameters to apply, replaces ones
+	 *                           which was configured by Command or CommandBuilder if any
 	 *
 	 * @return IQueryResult|false
 	 */
