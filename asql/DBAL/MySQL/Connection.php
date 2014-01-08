@@ -6,17 +6,17 @@
  * Time: 19:39
  */
 
-namespace asql\Db\MySQL;
+namespace asql\DBAL\MySQL;
 
-use asql\Db\PDO\Connection as PDOConnection;
-use asql\Db\IConnection;
+use asql\DBAL\PDO\Connection as PDOConnection;
+use asql\DBAL\IConnection;
 
 /**
  * Class Connection
  *
  * MySQL connection Supervisor Object
  *
- * @package asql\Db\MySQL
+ * @package asql\DBAL\MySQL
  */
 class Connection extends PDOConnection implements IConnection
 {
@@ -67,7 +67,7 @@ class Connection extends PDOConnection implements IConnection
 	public function setup(array $config, array $options = array())
 	{
 		parent::setup($config, $options);
-		$this->commandClass = '\asql\Db\MySQL\Command';
+		$this->commandClass = '\asql\DBAL\MySQL\Command';
 
 		$params = array(
 			'dsn',

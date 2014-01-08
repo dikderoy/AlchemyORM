@@ -6,9 +6,9 @@
  * Time: 22:37
  */
 
-namespace asql\Db\PDO;
+namespace asql\DBAL\PDO;
 
-use asql\Db\IQueryResult;
+use asql\DBAL\IQueryResult;
 use \PDOStatement as BaseQueryResult;
 
 class QueryResult extends BaseQueryResult implements IQueryResult

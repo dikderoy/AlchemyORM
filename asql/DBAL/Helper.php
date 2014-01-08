@@ -6,7 +6,7 @@
  * Time: 7:38
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 class Helper
 {

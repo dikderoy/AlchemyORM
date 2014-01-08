@@ -6,14 +6,14 @@
  * Time: 7:17
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 /**
  * Class Query
  *
  * implements main driver-independent Query logic
  *
- * @package asql\Db
+ * @package asql\DBAL
  */
 abstract class Query implements IQuery
 {

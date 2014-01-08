@@ -6,7 +6,7 @@
  * Time: 7:14
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 interface ISQLCommandBuilder
 {

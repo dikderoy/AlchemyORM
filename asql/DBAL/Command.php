@@ -6,14 +6,14 @@
  * Time: 7:18
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 /**
  * Class Command
  *
  * implements main driver-independent Command logic
  *
- * @package asql\Db
+ * @package asql\DBAL
  */
 abstract class Command implements ICommand
 {

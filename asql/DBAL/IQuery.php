@@ -6,7 +6,7 @@
  * Time: 7:13
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 /**
  * Interface IQuery
@@ -15,7 +15,7 @@ namespace asql\Db;
  * - they present the API to control generated Statement object
  * and properly evaluate it
  *
- * @package asql\Db
+ * @package asql\DBAL
  */
 interface IQuery extends ICommand
 {

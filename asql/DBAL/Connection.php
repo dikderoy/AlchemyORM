@@ -6,14 +6,14 @@
  * Time: 7:17
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 abstract class Connection implements IConnection
 {
 	/**
 	 * configurable class used for Queries,
 	 * must implement IQuery interface
-	 * and|or be extended from \asq\Db\Query or its descendants
+	 * and|or be extended from \asq\DBAL\Query or its descendants
 	 *
 	 * @var string
 	 */
@@ -21,7 +21,7 @@ abstract class Connection implements IConnection
 	/**
 	 * configurable class used for Commands,
 	 * must implement ICommand interface
-	 * and|or be extended from \asq\Db\Command or its descendants
+	 * and|or be extended from \asq\DBAL\Command or its descendants
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ abstract class Connection implements IConnection
 	/**
 	 * configurable class used for Statements|QueryResults,
 	 * must implement IQueryResult interface
-	 * and|or be extended from \asq\Db\QueryResult or its descendants
+	 * and|or be extended from \asq\DBAL\QueryResult or its descendants
 	 *
 	 * @var string
 	 */

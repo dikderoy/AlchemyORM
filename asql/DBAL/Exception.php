@@ -6,7 +6,7 @@
  * Time: 7:19
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 class Exception extends \PDOException
 {

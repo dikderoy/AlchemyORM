@@ -6,7 +6,7 @@
  * Time: 7:15
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 /**
  * Interface ICommand
@@ -14,7 +14,7 @@ namespace asql\Db;
  * main purpose of Command object is to represent data needed
  * to construct the Query object
  *
- * @package asql\Db
+ * @package asql\DBAL
  */
 interface ICommand
 {

@@ -6,18 +6,18 @@
  * Time: 1:43
  */
 
-namespace asql\Db\PDO;
+namespace asql\DBAL\PDO;
 
-use asql\Db\Connection as BaseConnection;
-use asql\Db\Exception;
-use asql\Db\IConnection;
+use asql\DBAL\Connection as BaseConnection;
+use asql\DBAL\Exception;
+use asql\DBAL\IConnection;
 
 /**
  * Class Connection
  *
  * Generic PDO Connection supervisor
  *
- * @package asql\Db\PDO
+ * @package asql\DBAL\PDO
  *
  * @method \PDO getConnection()
  */
@@ -47,7 +47,7 @@ abstract class Connection extends BaseConnection implements IConnection
 	/**
 	 * returns Id of last inserted entry
 	 *
-	 * @throws \asql\Db\Exception
+	 * @throws \asql\DBAL\Exception
 	 * @return string
 	 */
 	public function getLastInsertId()
@@ -68,10 +68,10 @@ abstract class Connection extends BaseConnection implements IConnection
 	 */
 	public function connect(array $options = array())
 	{
+		if (!empty($options)) {
+			$this->options = array_merge($this->options, $options);
+		}
 		try {
-			if (!empty($options)) {
-				$this->options = array_merge($this->options, $options);
-			}
 			$this->connection = new \PDO($this->dsn, $this->username, $this->password, $this->options);
 			$this->connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 			$this->connection->setAttribute(\PDO::ATTR_STATEMENT_CLASS, array($this->resultClass, array($this->connection)));
@@ -83,9 +83,8 @@ abstract class Connection extends BaseConnection implements IConnection
 	public function setup(array $config, array $options = array())
 	{
 		parent::setup($config, $options);
-
-		$this->queryClass  = '\asql\Db\PDO\Query';
-		$this->resultClass = '\asql\Db\PDO\QueryResult';
+		$this->queryClass  = '\asql\DBAL\PDO\Query';
+		$this->resultClass = '\asql\DBAL\PDO\QueryResult';
 	}
 
 	/**

@@ -6,12 +6,12 @@
  * Time: 20:53
  */
 
-namespace asql\Db\PDO;
+namespace asql\DBAL\PDO;
 
-use asql\Db\Exception;
-use asql\Db\IQuery;
-use asql\Db\IQueryResult;
-use asql\Db\Query as BaseQuery;
+use asql\DBAL\Exception;
+use asql\DBAL\IQuery;
+use asql\DBAL\IQueryResult;
+use asql\DBAL\Query as BaseQuery;
 
 class Query extends BaseQuery implements IQuery
 {
@@ -43,7 +43,7 @@ class Query extends BaseQuery implements IQuery
 	/**
 	 * prepare a query for multiple execution
 	 *
-	 * @throws \asql\Db\Exception
+	 * @throws \asql\DBAL\Exception
 	 * @return IQuery
 	 */
 	public function prepare()
@@ -67,7 +67,7 @@ class Query extends BaseQuery implements IQuery
 	 * @param null $params
 	 * @param bool $rowCount return row count if query succeeds
 	 *
-	 * @throws \asql\Db\Exception
+	 * @throws \asql\DBAL\Exception
 	 * @return bool|int
 	 */
 	public function execute($params = null, $rowCount = false)
@@ -99,7 +99,7 @@ class Query extends BaseQuery implements IQuery
 	 * @param array|null $params parameters to apply,
 	 * replaces ones which was configured by Command or CommandBuilder if any
 	 *
-	 * @throws \asql\Db\Exception
+	 * @throws \asql\DBAL\Exception
 	 * @return IQueryResult|false
 	 */
 	public function query($params = null)

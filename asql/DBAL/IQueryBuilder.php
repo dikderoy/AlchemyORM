@@ -6,7 +6,7 @@
  * Time: 10:15
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 /**
  * Interface IQueryBuilder
@@ -16,7 +16,7 @@ namespace asql\Db;
  * main purpose of QB is to receive collected command meta
  * and make Query object with generated SQL from it
  *
- * @package asql\Db
+ * @package asql\DBAL
  */
 interface IQueryBuilder
 {

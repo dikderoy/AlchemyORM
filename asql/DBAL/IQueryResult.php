@@ -6,7 +6,7 @@
  * Time: 7:16
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 interface IQueryResult
 {

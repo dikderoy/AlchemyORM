@@ -6,7 +6,7 @@
  * Time: 7:13
  */
 
-namespace asql\Db;
+namespace asql\DBAL;
 
 interface IConnection
 {
