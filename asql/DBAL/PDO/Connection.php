@@ -83,8 +83,9 @@ abstract class Connection extends BaseConnection implements IConnection
 	public function setup(array $config, array $options = array())
 	{
 		parent::setup($config, $options);
-		$this->queryClass  = '\asql\DBAL\PDO\Query';
-		$this->resultClass = '\asql\DBAL\PDO\QueryResult';
+		$this->queryClass       = '\asql\DBAL\PDO\Query';
+		$this->resultClass      = '\asql\DBAL\PDO\QueryResult';
+		$this->transactionClass = '\asql\DBAL\PDO\Transaction';
 	}
 
 	/**

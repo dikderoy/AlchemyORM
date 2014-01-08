@@ -17,7 +17,7 @@ abstract class Connection implements IConnection
 	 *
 	 * @var string
 	 */
-	protected $queryClass = '\asql\Db\Query';
+	protected $queryClass = '\asql\DBAL\Query';
 	/**
 	 * configurable class used for Commands,
 	 * must implement ICommand interface
@@ -25,7 +25,7 @@ abstract class Connection implements IConnection
 	 *
 	 * @var string
 	 */
-	protected $commandClass = '\asql\Db\Command';
+	protected $commandClass = '\asql\DBAL\Command';
 	/**
 	 * configurable class used for Statements|QueryResults,
 	 * must implement IQueryResult interface
@@ -33,7 +33,14 @@ abstract class Connection implements IConnection
 	 *
 	 * @var string
 	 */
-	protected $resultClass = '\asql\Db\QueryResult';
+	protected $resultClass = '\asql\DBAL\QueryResult';
+	/**
+	 * configurable class used for Transactions
+	 * must implement ITransaction interface
+	 * and|or be extended from \asql\DBAL\Transaction or its descendants
+	 * @var string
+	 */
+	protected $transactionClass = 'asql\DBAL\Transaction';
 	/**
 	 * configuration parameters as is
 	 *
@@ -52,6 +59,11 @@ abstract class Connection implements IConnection
 	 * @var mixed|resource|null
 	 */
 	protected $connection;
+	/**
+	 * active transaction
+	 * @var null|ITransaction
+	 */
+	protected $transaction = null;
 
 	/**
 	 * sets parameters for connection to a server
@@ -124,5 +136,19 @@ abstract class Connection implements IConnection
 	public function createQuery($query)
 	{
 		return new $this->queryClass($this, $query);
+	}
+
+	/**
+	 * initiates a transaction
+	 *
+	 * @return ITransaction
+	 */
+	public function beginTransaction()
+	{
+		if (!$this->transaction instanceof ITransaction || !$this->transaction->isActive()) {
+			$this->transaction = new $this->transactionClass($this);
+			$this->transaction->begin();
+		}
+		return $this->transaction;
 	}
 }

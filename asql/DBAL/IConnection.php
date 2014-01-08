@@ -94,4 +94,11 @@ interface IConnection
 	 * @return IQuery
 	 */
 	public function createQuery($query);
+
+	/**
+	 * initiates a transaction
+	 *
+	 * @return ITransaction
+	 */
+	public function beginTransaction();
 }
