@@ -21,7 +21,7 @@ class QueryResult extends BaseQueryResult implements IQueryResult
 	/**
 	 * this constructor override is needed (otherwise it is not working)
 	 *
-	 * @param $dbh - ether a connection handle or statement object
+	 * @param $dbh - either a connection handle or statement object
 	 *
 	 * should be saved within QueryResult object
 	 *
