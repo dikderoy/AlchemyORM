@@ -71,6 +71,8 @@ abstract class Connection extends BaseConnection implements IConnection
 		if (!empty($options)) {
 			$this->options = array_merge($this->options, $options);
 		}
+		if (!$this->check())
+			throw new Exception('Can not established connection: parameters missing');
 		try {
 			$this->connection = new \PDO($this->dsn, $this->username, $this->password, $this->options);
 			$this->connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
@@ -94,7 +96,7 @@ abstract class Connection extends BaseConnection implements IConnection
 	 */
 	public function check()
 	{
-		if ($this->username && $this->password && $this->dsn)
+		if (!empty($this->username) && !empty($this->dsn))
 			return true;
 		return false;
 	}
